@@ -2,9 +2,7 @@ package db;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Properties;
 
 public class DB {
@@ -33,6 +31,26 @@ public class DB {
                 conn.close();
             } catch (SQLException err) {
                 System.out.println("Error while closing the connection: " + err.getMessage());
+            }
+        }
+    }
+
+    public static void closeStatement(Statement s) throws DbException{
+        if (s != null) {
+            try {
+                s.close();
+            } catch(SQLException err) {
+                throw new DbException(err.getMessage());
+            }
+        }
+    }
+
+    public void closeResultSet(ResultSet rs) throws DbException {
+        if (rs != null) {
+            try {
+                rs.close();
+            } catch(SQLException err) {
+                throw new DbException(err.getMessage());
             }
         }
     }
