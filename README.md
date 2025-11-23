@@ -12,21 +12,19 @@ C) Set up the db.properties file in the root of the project.
 ## SQL Tables
 
 ### Seller
-+--------------+--------------+------+-----+---------+-------+
 | Field        | Type         | Null | Key | Default | Extra |
-+--------------+--------------+------+-----+---------+-------+
+| ------------ | ------------ | ---- | --- | ------- | ----- |
 | Id           | int          | NO   | PRI | NULL    |       |
 | Name         | varchar(250) | YES  |     | NULL    |       |
 | Email        | varchar(250) | YES  |     | NULL    |       |
 | BirthDate    | date         | YES  |     | NULL    |       |
 | BaseSalary   | double       | YES  |     | NULL    |       |
 | DepartmentId | int          | YES  | MUL | NULL    |       |
-+--------------+--------------+------+-----+---------+-------+
+
 
 ## Department
-+-------+-------------+------+-----+---------+-------+
 | Field | Type        | Null | Key | Default | Extra |
-+-------+-------------+------+-----+---------+-------+
+| ----- | ----------- | ---- | --- | ------- | ----- |
 | Id    | int         | NO   | PRI | NULL    |       |
 | Name  | varchar(60) | YES  |     | NULL    |       |
-+-------+-------------+------+-----+---------+-------+
+
