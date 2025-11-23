@@ -33,6 +33,23 @@ public class DepartmentDaoJDBC implements DepartmentDao {
     @Override
     public void deleteById(Integer id) {
 
+        PreparedStatement ps = null;
+        try {
+            ps = this.conn.prepareStatement("DELETE FROM department WHERE Id = ?");
+
+            ps.setInt(1, id);
+            int rows = ps.executeUpdate();
+
+            if(rows == 0) System.out.println("Department already deleted or never registered");
+            else System.out.println(rows + " deleted successfully.");
+
+        } catch(SQLException err) {
+            throw new DbException(err.getMessage());
+
+        } finally {
+            DB.closeStatement(ps);
+        }
+
     }
 
     @Override
@@ -78,7 +95,8 @@ public class DepartmentDaoJDBC implements DepartmentDao {
              rs = st.executeQuery("SELECT * FROM department");
 
              while(rs.next()) {
-                 departments.add(new Department(rs.getInt("Id"), rs.getString("Name")));
+                 Department d = instantiateDepartment(rs.getInt("Id"), rs.getString("Name"));
+                 departments.add(d);
              }
 
              return departments;
@@ -89,5 +107,9 @@ public class DepartmentDaoJDBC implements DepartmentDao {
              DB.closeStatement(st);
          }
          return null;
+    }
+
+    private static Department instantiateDepartment(Integer id, String name) {
+        return new Department(id, name);
     }
 }
