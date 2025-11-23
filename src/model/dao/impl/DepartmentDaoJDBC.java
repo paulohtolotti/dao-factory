@@ -20,9 +20,31 @@ public class DepartmentDaoJDBC implements DepartmentDao {
     public DepartmentDaoJDBC() {
 
     }
+
     @Override
     public void insert(Department obj) {
+        PreparedStatement ps = null;
 
+        try {
+            ps = this.conn.prepareStatement("INSERT INTO department (Id, Name) VALUES (?, ?)");
+
+            ps.setInt(1, obj.getId());
+            ps.setString(2, obj.getName());
+
+            Department dep = this.findById(obj.getId());
+
+            if(dep != null) throw new DbException("Department already registered");
+
+            ps.executeUpdate();
+
+            System.out.println("Department successfully added");
+
+        } catch (SQLException err) {
+            throw new DbException(err.getMessage());
+
+        } finally {
+            DB.closeStatement(ps);
+        }
     }
 
     @Override
