@@ -4,7 +4,6 @@ import db.DB;
 import model.dao.impl.DepartmentDaoJDBC;
 import model.dao.impl.SellerDaoJDBC;
 
-import static db.DB.conn;
 
 public class DaoFactory {
 
