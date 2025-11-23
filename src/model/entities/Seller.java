@@ -33,6 +33,9 @@ public class Seller implements Serializable {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
     public Department getDepartment() {
         return department;
     }
